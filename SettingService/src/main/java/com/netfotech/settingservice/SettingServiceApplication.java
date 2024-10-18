@@ -1,4 +1,4 @@
-package com.netfotech.SettingService;
+package com.netfotech.settingservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
