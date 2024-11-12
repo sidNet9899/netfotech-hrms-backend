@@ -1,6 +1,7 @@
 package com.netfotech.auth.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,18 +41,31 @@ public class AuthController {
 
 		return new AuthResponse(jwt); // Now uses the constructor correctly
 	}
-
-	// Only SuperAdmin can access this endpoint
-	@GetMapping("/admin")
-	@PreAuthorize("hasRole('SuperAdmin')")
-	public String superAdminArea() {
-		return "You are accessing a SuperAdmin-only area!";
+	
+	@GetMapping("/validate")
+	public ResponseEntity<Boolean> validateToken(@RequestHeader("Authorization") String token) {
+	    String username = null;
+	    if (token != null && token.startsWith("Bearer ")) {
+	        token = token.substring(7); // Remove "Bearer " prefix
+	        username = jwtUtil.extractUsername(token);
+	    }
+	    
+	    boolean isValid = jwtUtil.validateToken(token, username);
+	    return ResponseEntity.ok(isValid);
 	}
 
-	// Admin and SuperAdmin can access this
-	@GetMapping("/admin-only")
-	@PreAuthorize("hasAnyRole('Admin', 'SuperAdmin')")
-	public String adminArea() {
-		return "Welcome, Admin!";
-	}
 }
+
+//// Only SuperAdmin can access this endpoint
+//@GetMapping("/admin")
+//@PreAuthorize("hasRole('SuperAdmin')")
+//public String superAdminArea() {
+//	return "You are accessing a SuperAdmin-only area!";
+//}
+//
+//// Admin and SuperAdmin can access this
+//@GetMapping("/admin-only")
+//@PreAuthorize("hasAnyRole('Admin', 'SuperAdmin')")
+//public String adminArea() {
+//	return "Welcome, Admin!";
+//}

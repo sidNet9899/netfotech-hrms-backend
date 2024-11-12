@@ -34,7 +34,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable()) // Lambda-style syntax for disabling CSRF
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll() // Allow public access to auth API
+                .requestMatchers("/api/auth/**" ,"/api/auth/validate").permitAll() // Allow public access to auth API
                 .requestMatchers("/superadmin/**").hasRole("SUPERADMIN")  // SuperAdmin only
                 .requestMatchers("/admin/**").hasRole("ADMIN")            // Admin only
                 .requestMatchers("/employee/**").hasRole("EMPLOYEE")      // Employee only
