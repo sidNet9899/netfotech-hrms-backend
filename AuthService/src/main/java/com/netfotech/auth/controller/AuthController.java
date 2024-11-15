@@ -33,16 +33,7 @@ public class AuthController {
 	@Autowired
 	private JwtUtil jwtUtil;
 
-//	@PostMapping("/login")
-//	public AuthResponse createAuthenticationToken(@RequestBody AuthRequest authRequest) throws Exception {
-//		authenticationManager.authenticate(
-//				new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-//
-//		final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
-//		final String jwt = jwtUtil.generateToken(userDetails.getUsername());
-//
-//		return new AuthResponse(jwt); // Now uses the constructor correctly
-//	}
+
 	
 	@PostMapping("/login")
 	public AuthResponse createAuthenticationToken(@RequestBody AuthRequest authRequest) throws Exception {
@@ -88,4 +79,16 @@ public class AuthController {
 //@PreAuthorize("hasAnyRole('Admin', 'SuperAdmin')")
 //public String adminArea() {
 //	return "Welcome, Admin!";
+//}
+
+
+//@PostMapping("/login")
+//public AuthResponse createAuthenticationToken(@RequestBody AuthRequest authRequest) throws Exception {
+//	authenticationManager.authenticate(
+//			new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+//
+//	final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
+//	final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+//
+//	return new AuthResponse(jwt); // Now uses the constructor correctly
 //}
