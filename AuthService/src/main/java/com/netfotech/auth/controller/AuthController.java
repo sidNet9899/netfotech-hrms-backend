@@ -1,5 +1,7 @@
 package com.netfotech.auth.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,15 +33,33 @@ public class AuthController {
 	@Autowired
 	private JwtUtil jwtUtil;
 
+//	@PostMapping("/login")
+//	public AuthResponse createAuthenticationToken(@RequestBody AuthRequest authRequest) throws Exception {
+//		authenticationManager.authenticate(
+//				new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+//
+//		final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
+//		final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+//
+//		return new AuthResponse(jwt); // Now uses the constructor correctly
+//	}
+	
 	@PostMapping("/login")
 	public AuthResponse createAuthenticationToken(@RequestBody AuthRequest authRequest) throws Exception {
-		authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+	    authenticationManager.authenticate(
+	            new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
 
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
-		final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+	    final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
+	    
+	    // Retrieve roles from UserDetails
+	    List<String> roles = userDetails.getAuthorities().stream()
+	            .map(grantedAuthority -> grantedAuthority.getAuthority())
+	            .toList(); // Convert to List<String>
 
-		return new AuthResponse(jwt); // Now uses the constructor correctly
+	    // Pass the username and roles to generateToken
+	    final String jwt = jwtUtil.generateToken(userDetails.getUsername(), roles);
+
+	    return new AuthResponse(jwt);
 	}
 	
 	@GetMapping("/validate")

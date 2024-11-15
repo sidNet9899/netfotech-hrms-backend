@@ -35,9 +35,6 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable()) // Lambda-style syntax for disabling CSRF
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**" ,"/api/auth/validate").permitAll() // Allow public access to auth API
-                .requestMatchers("/superadmin/**").hasRole("SUPERADMIN")  // SuperAdmin only
-                .requestMatchers("/admin/**").hasRole("ADMIN")            // Admin only
-                .requestMatchers("/employee/**").hasRole("EMPLOYEE")      // Employee only
                 .anyRequest().authenticated()
             )
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // Stateless JWT handling
@@ -67,4 +64,7 @@ public class SecurityConfig {
 
 }
 
+//.requestMatchers("/superadmin/**").hasRole("SUPERADMIN")  // SuperAdmin only
+//.requestMatchers("/admin/**").hasRole("ADMIN")            // Admin only
+//.requestMatchers("/employee/**").hasRole("EMPLOYEE")      // Employee only
 
