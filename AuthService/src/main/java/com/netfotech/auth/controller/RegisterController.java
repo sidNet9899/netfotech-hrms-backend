@@ -1,9 +1,6 @@
 package com.netfotech.auth.controller;
 
-import org.hibernate.boot.model.internal.Nullability;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -96,20 +93,3 @@ public class RegisterController {
     }
 
 }
-
-//// Ensure the user has the "SuperAdmin" role
-//User superAdmin = userRepository.findByUsername(username)
-//		.orElseThrow(() -> new RuntimeException("User not found"));
-//
-//
-//if (superAdmin.getRole() != Role.SUPER_ADMIN) {
-//	return "Only SuperAdmin can register new users.";
-//}
-//
-//// Set role for the new user (Admin or Employee based on your logic)
-//if (user.getRole() == null) {
-//	
-//	user.setRole(Role.ADMIN);
-//	//user.setRole(Role.EMPLOYEE); // Default to Employee if no role is provided
-//	//return "Role must be provided for the new user.";
-//}
