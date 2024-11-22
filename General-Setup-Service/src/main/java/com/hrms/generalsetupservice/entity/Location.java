@@ -50,11 +50,9 @@ public class Location {
 
     @NotNull(message = "Radius cannot be null")
     private Double radius;
-    
-    @NotNull
-    private String status;
-//    @Enumerated(EnumType.STRING)
-//    @NotNull(message = "Status cannot be null")
-//    private Status status;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Status cannot be null")
+    private Status status;
 
 }

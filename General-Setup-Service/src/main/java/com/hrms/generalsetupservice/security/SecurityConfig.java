@@ -20,7 +20,7 @@ public class SecurityConfig{
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http.csrf(csrf -> csrf.disable())
 	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers("/api/companies/**", "/api/locations/**")
+	            .requestMatchers("/api/companies/**", "/api/locations/**" , "/api/departments/**" ,"/api/jobtitle/**")
 	            .hasAnyAuthority("ROLE_SUPER_ADMIN", "ROLE_ADMIN") // Allow only ADMIN and SUPERADMIN
 	            .anyRequest().authenticated()
 	        )

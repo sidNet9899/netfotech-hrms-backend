@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hrms.generalsetupservice.dto.CompanyDto;
-import com.hrms.generalsetupservice.entity.Company;
-import com.hrms.generalsetupservice.feign.AuthClient;
 import com.hrms.generalsetupservice.service.CompanyService;
 
 @RestController
@@ -23,9 +21,6 @@ import com.hrms.generalsetupservice.service.CompanyService;
 public class CompanyController {
 	@Autowired
     private CompanyService companyService;
-	
-	@Autowired
-	private AuthClient authClient;
 	
 
     @GetMapping("/all")

@@ -59,28 +59,3 @@ public class JwtRequestFilter extends OncePerRequestFilter{
 
 
 }
-
-
-//@Override
-//protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-//      throws ServletException, IOException {
-//  String authHeader = request.getHeader("Authorization");
-//  if (authHeader != null && authHeader.startsWith("Bearer ")) {
-//      // Pass the full Authorization header to the auth service
-//      Boolean isValid = authClient.validateToken(authHeader);
-//      System.out.println("Token validation result: " + isValid);
-//      String SECRET_KEY = "ffshfjrowjormgowrdastegr";
-//      
-//      String token = authHeader.substring(7);
-//      Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-//      System.out.println("Roles from token: " + claims.get("roles"));
-//      if (isValid == null || !isValid) {
-//          response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT token");
-//          return;
-//      }
-//  } else {
-//      response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authorization header is missing or invalid");
-//      return;
-//  }
-//  chain.doFilter(request, response);
-//} 
