@@ -6,9 +6,9 @@ spring:
     name: AuthServices
 
   datasource:
-    url: jdbc:mysql://localhost:3308/authdatabase
+    url: jdbc:mysql://localhost:3306/authdatabase
     username: root
-    password: Sid9899@00
+    password: Vishal#184200
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
