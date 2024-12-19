@@ -63,6 +63,14 @@ public class AuthController {
 	    boolean isValid = jwtUtil.validateToken(token, username);
 	    return ResponseEntity.ok(isValid);
 	}
+	
+	 @GetMapping("/extract-username")
+	    public String extractUsername(@RequestHeader("Authorization") String token) {
+	        if (token.startsWith("Bearer ")) {
+	            token = token.substring(7); // Remove "Bearer " prefix
+	        }
+	        return jwtUtil.extractUsername(token); // Extract username from token
+	    }
 
 }
 
