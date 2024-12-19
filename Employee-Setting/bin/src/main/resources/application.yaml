@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/hrms_employeesetting
+    url: jdbc:mysql://localhost:3308/hrms_employeesetting
     username: root
-    password: Vishal#184200
+    password: Sid9899@00
   jpa:
     hibernate:
       ddl-auto: update
